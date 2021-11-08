@@ -129,4 +129,4 @@ print(
     .format(classnames[np.argmax(score)], 100 * np.max(score))
 )
 
-#model.save("Porteller_Model")
+#model.save("PortellerModel")
