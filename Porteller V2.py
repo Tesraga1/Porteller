@@ -10,7 +10,7 @@ import numpy as np
 dataset_directory = "PortellerPhotos/"
 img_dimension = 255
 epochs = 30
-num_classes = 2
+num_classes = 3
 epochs_range = range(epochs)
 
 train_data = image_dataset_from_directory(
@@ -111,7 +111,7 @@ plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
 
-HDMI_path = "TestingPictures/HDMI_2.jpeg"
+HDMI_path = "TestingPictures/PS2_image.jpg"
 img = keras.utils.load_img(
     HDMI_path, target_size=(img_dimension, img_dimension)
 )
