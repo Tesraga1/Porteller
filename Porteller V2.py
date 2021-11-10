@@ -1,3 +1,4 @@
+#Julian Blanco
 import tensorflow.keras as keras
 from keras.models import Sequential
 from keras.layers import *
@@ -8,9 +9,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 dataset_directory = "PortellerPhotos/"
+Test_path = "TestingPictures/Display_test.jpg"
 img_dimension = 255
 epochs = 30
-num_classes = 3
+num_classes = 4
+batch_data = 16
 epochs_range = range(epochs)
 
 train_data = image_dataset_from_directory(
@@ -19,7 +22,7 @@ train_data = image_dataset_from_directory(
     subset="training",
     seed=123,
     image_size=(img_dimension, img_dimension),
-    batch_size=32,
+    batch_size=batch_data,
 )
 
 val_ds = image_dataset_from_directory(
@@ -28,7 +31,7 @@ val_ds = image_dataset_from_directory(
   subset="validation",
   seed=123,
   image_size=(img_dimension, img_dimension),
-  batch_size=32,
+  batch_size=batch_data,
 )
 
 classnames = train_data.class_names
@@ -111,9 +114,9 @@ plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
 
-HDMI_path = "TestingPictures/PS2_image.jpg"
+
 img = keras.utils.load_img(
-    HDMI_path, target_size=(img_dimension, img_dimension)
+    Test_path, target_size=(img_dimension, img_dimension)
 )
 
 img_array = tf.keras.utils.img_to_array(img)
@@ -129,4 +132,4 @@ print(
     .format(classnames[np.argmax(score)], 100 * np.max(score))
 )
 
-#model.save("PortellerModel")
+model.save("PortellerModel")
