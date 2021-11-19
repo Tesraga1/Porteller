@@ -9,16 +9,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 dataset_directory = "PortellerPhotos/"
-Test_path = "TestingPictures/Display_test.jpg"
+Test_path = "TestingPictures/USBC_image.jpg"
 img_dimension = 255
-epochs = 30
-num_classes = 4
+val_split = 0.4
+epochs = 28
+num_classes = 5
 batch_data = 16
 epochs_range = range(epochs)
 
 train_data = image_dataset_from_directory(
     dataset_directory,
-    validation_split=0.4,
+    validation_split=val_split,
     subset="training",
     seed=123,
     image_size=(img_dimension, img_dimension),
@@ -27,7 +28,7 @@ train_data = image_dataset_from_directory(
 
 val_ds = image_dataset_from_directory(
   dataset_directory,
-  validation_split=0.4,
+  validation_split=val_split,
   subset="validation",
   seed=123,
   image_size=(img_dimension, img_dimension),
@@ -53,8 +54,8 @@ data_augmentation = keras.Sequential(
                       input_shape=(img_dimension,
                                   img_dimension,
                                   3)),
-    RandomRotation(0.1),
-    RandomZoom(0.1),
+    RandomRotation(0.2),
+    RandomZoom(0.2),
   ]
 )
 
