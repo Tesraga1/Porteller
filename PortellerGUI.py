@@ -5,7 +5,7 @@ from tkinter import filedialog
 from tensorflow import keras
 from PIL import ImageTk, Image
 img_dimension = 255
-classnames = ['DVI', 'DisplayPort', 'HDMI', 'PS2', 'USBC']
+classnames = ['DVI', 'DisplayPort', 'HDMI', 'PS2', 'USBC', 'VGA']
 model = keras.models.load_model("PortellerModel")
 predicted_model = ""
 
