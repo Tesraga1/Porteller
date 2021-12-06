@@ -9,11 +9,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 dataset_directory = "PortellerPhotos/"
-Test_path = "TestingPictures/USBC_image.jpg"
+Test_path = "TestingPictures/VGA_image.jpg"
 img_dimension = 255
 val_split = 0.4
 epochs = 28
-num_classes = 5
+num_classes = 6
 batch_data = 16
 epochs_range = range(epochs)
 
