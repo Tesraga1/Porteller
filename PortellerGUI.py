@@ -4,10 +4,19 @@ import numpy as np
 from tkinter import filedialog
 from tensorflow import keras
 from PIL import ImageTk, Image
+import os
+import sys
 img_dimension = 255
 classnames = ['DVI', 'DisplayPort', 'HDMI', 'PS2', 'USBC', 'VGA']
-model = keras.models.load_model("PortellerModel")
 predicted_model = ""
+
+def resource_path(relative_path):
+#"Get absolute path to resource, works for dev and for PyInstaller"
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+model_path = resource_path("PortellerModel")
+model = keras.models.load_model(model_path)
 
 def file_predict(photo):
     image = Image.open(photo)
@@ -26,11 +35,16 @@ def UploadAction(event=None):
     
 root = tk.Tk()
 root["bg"]="green"
-button = tk.Button(root, text='Open', command=UploadAction)
-text = tk.Text(root, height=2, width=40)
-text["bg"]="orange"
-button.pack()
-text.pack()
+root.title("Proteller")
 
+border_color = tk.Frame(root, background="red")
+button = tk.Button(root, text='Open', command=UploadAction, padx=20, pady=5, font=("Ariel",20))
+text = tk.Text(border_color, height=5, width=40)
+
+text.insert(tk.END, "Please select a photo with a close up of a computer port")
+
+text.pack()
+border_color.pack(padx=40, pady=40)
+button.pack()
 
 root.mainloop()
