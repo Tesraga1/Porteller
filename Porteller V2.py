@@ -2,18 +2,16 @@
 import tensorflow.keras as keras
 from keras.models import Sequential
 from keras.layers import *
-import tensorflow
-import os
 from keras.preprocessing.image import *
 import matplotlib.pyplot as plt
 import numpy as np
 
 dataset_directory = "PortellerPhotos/"
 Test_path = "TestingPictures/VGA_image.jpg"
-img_dimension = 255
-val_split = 0.4
+img_dimension = 256
+val_split = 0.3
 epochs = 28
-num_classes = 6
+num_classes = 7
 batch_data = 16
 epochs_range = range(epochs)
 
@@ -50,10 +48,7 @@ val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
 data_augmentation = keras.Sequential(
   [
-    RandomFlip("horizontal",
-                      input_shape=(img_dimension,
-                                  img_dimension,
-                                  3)),
+    RandomFlip("horizontal", input_shape=(img_dimension, img_dimension,3)),
     RandomRotation(0.2),
     RandomZoom(0.2),
   ]
@@ -71,7 +66,9 @@ for images, labels in train_data.take(1):
 
 model = Sequential([
   data_augmentation,
-  Rescaling(1./255),
+  Rescaling(1./256),
+  Conv2D(8, 3, padding='same', activation='relu'),
+  MaxPooling2D(),
   Conv2D(16, 3, padding='same', activation='relu'),
   MaxPooling2D(),
   Conv2D(32, 3, padding='same', activation='relu'),
